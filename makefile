@@ -121,7 +121,7 @@ kind-update: all kind-load kind-restart
 kind-update-apply: all kind-load kind-apply
 
 kind-logs:
-	kubectl logs -l app=sales --all-containers=true -f --tail=100 #| go run app/tooling/logfmt/main.go
+	kubectl logs -l app=sales --all-containers=true -f --tail=100 | go run app/tooling/logfmt/main.go
 
 kind-logs-sales:
 	kubectl logs -l app=sales --all-containers=true -f --tail=100 | go run app/tooling/logfmt/main.go -service=SALES-API
@@ -198,6 +198,9 @@ test:
 
 # ==============================================================================
 # Modules support
+
+run:
+	go run app/services/sales-api/main.go | go run app/tooling/logfmt/main.go
 
 deps-reset:
 	git checkout -- go.mod

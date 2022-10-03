@@ -20,5 +20,5 @@ func (h Handlers) Test(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(status)
 
 	statusCode := http.StatusOK
-	h.Log.Infow("readiness", "statusCode", statusCode, "method", r.Method, "path", r.URL.Path, "remoteaddr", r.RemoteAddr)
+	h.Log.Infow("v1/test", "statusCode", statusCode, "method", r.Method, "path", r.URL.Path, "remoteaddr", r.RemoteAddr)
 }

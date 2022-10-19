@@ -42,18 +42,15 @@ func (a *App) Handle(method string, group string, path string, handler Handler) 
 
 	h := func(w http.ResponseWriter, r *http.Request) {
 
-		// PRE CODE PROCESSING
-		// Logging Started
+		// INJECT CODE
 
 		if err := handler(r.Context(), w, r); err != nil {
 
-			// Logging error - handle it
-			// ERROR HANDLING
+			// INJECT CODE
 			return
 		}
 
-		// Logging Ended
-		// POST CODE PROCESSING
+		// INJECT CODE
 	}
 
 	finalPath := path

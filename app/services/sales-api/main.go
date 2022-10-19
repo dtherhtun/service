@@ -169,7 +169,7 @@ func run(log *zap.SugaredLogger) error {
 		ctx, cancel := context.WithTimeout(context.Background(), cfg.Web.ShutdownTimeout)
 		defer cancel()
 
-		// Asking listener to shutdown and shed load.
+		// Asking listener to shut down and shed load.
 		if err := api.Shutdown(ctx); err != nil {
 			api.Close()
 			return fmt.Errorf("could not stop server gracefully: %w", err)

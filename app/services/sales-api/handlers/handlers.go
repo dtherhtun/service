@@ -4,6 +4,7 @@ import (
 	"expvar"
 	"github.com/dtherhtun/service/app/services/sales-api/handlers/debug/checkgrp"
 	"github.com/dtherhtun/service/app/services/sales-api/handlers/v1/testgrp"
+	"github.com/dtherhtun/service/business/web/mid"
 	"github.com/dtherhtun/service/foundation/web"
 	"go.uber.org/zap"
 	"net/http"
@@ -53,6 +54,7 @@ func APIMux(cfg APIMuxConfig) *web.App {
 	// Construct the web.app which holds all routes.
 	app := web.NewApp(
 		cfg.Shutdown,
+		mid.Logger(cfg.Log),
 	)
 
 	// Load the routes for the different versions of the API.

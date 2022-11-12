@@ -2,10 +2,12 @@ package mid
 
 import (
 	"context"
+	"net/http"
+
+	"go.uber.org/zap"
+
 	"github.com/dtherhtun/service/business/sys/validate"
 	"github.com/dtherhtun/service/foundation/web"
-	"go.uber.org/zap"
-	"net/http"
 )
 
 // Errors handles errors coming out of the call chain. It detects normal

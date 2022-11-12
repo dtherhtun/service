@@ -13,10 +13,11 @@ import (
 	"time"
 
 	conf "github.com/ardanlabs/conf/v3"
-	"github.com/dtherhtun/service/app/services/sales-api/handlers"
 	"go.uber.org/automaxprocs/maxprocs"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
+
+	"github.com/dtherhtun/service/app/services/sales-api/handlers"
 )
 
 /*

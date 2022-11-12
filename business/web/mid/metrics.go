@@ -2,9 +2,10 @@ package mid
 
 import (
 	"context"
+	"net/http"
+
 	"github.com/dtherhtun/service/business/sys/metrics"
 	"github.com/dtherhtun/service/foundation/web"
-	"net/http"
 )
 
 // Metrics updates program counters

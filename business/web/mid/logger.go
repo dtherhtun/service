@@ -2,10 +2,12 @@ package mid
 
 import (
 	"context"
-	"github.com/dtherhtun/service/foundation/web"
-	"go.uber.org/zap"
 	"net/http"
 	"time"
+
+	"go.uber.org/zap"
+
+	"github.com/dtherhtun/service/foundation/web"
 )
 
 // Logger writes some information about the request to the logs in the

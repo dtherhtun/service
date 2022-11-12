@@ -3,10 +3,11 @@ package mid
 import (
 	"context"
 	"fmt"
-	"github.com/dtherhtun/service/business/sys/metrics"
-	"github.com/dtherhtun/service/foundation/web"
 	"net/http"
 	"runtime/debug"
+
+	"github.com/dtherhtun/service/business/sys/metrics"
+	"github.com/dtherhtun/service/foundation/web"
 )
 
 // Panics recovers from panics and converts the panic to an error so it is

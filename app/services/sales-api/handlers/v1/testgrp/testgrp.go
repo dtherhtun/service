@@ -3,11 +3,13 @@ package testgrp
 import (
 	"context"
 	"errors"
-	"github.com/dtherhtun/service/business/sys/validate"
-	"github.com/dtherhtun/service/foundation/web"
-	"go.uber.org/zap"
 	"math/rand"
 	"net/http"
+
+	"go.uber.org/zap"
+
+	"github.com/dtherhtun/service/business/sys/validate"
+	"github.com/dtherhtun/service/foundation/web"
 )
 
 // Handlers manages the set of check endpoints.

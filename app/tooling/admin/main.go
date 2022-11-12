@@ -7,10 +7,11 @@ import (
 	"encoding/pem"
 	"errors"
 	"fmt"
-	"github.com/golang-jwt/jwt/v4"
 	"io"
 	"os"
 	"time"
+
+	"github.com/golang-jwt/jwt/v4"
 )
 
 func main() {

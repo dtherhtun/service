@@ -1,3 +1,4 @@
+// This program takes the structured log output and makes it readable.
 package main
 
 import (

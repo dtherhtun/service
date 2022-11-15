@@ -1,4 +1,4 @@
-// Package handlers manages the different versions of the API.
+// Package handlers manages the different versions of the API.1
 package handlers
 
 import (

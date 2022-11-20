@@ -1,65 +1,78 @@
+// Package validate contains the support for validating models.
 package validate
 
 import (
-	"encoding/json"
-	"errors"
+	"reflect"
+	"strings"
+
+	"github.com/go-playground/locales/en"
+	ut "github.com/go-playground/universal-translator"
+	"github.com/go-playground/validator/v10"
+	en_translations "github.com/go-playground/validator/v10/translations/en"
+	"github.com/google/uuid"
 )
 
-// ErrInvalidID occurs when an ID is not in a valid form.
-var ErrInvalidID = errors.New("ID is not in its proper form")
+// validate holds the settings and caches for validating request struct values.
+var validate *validator.Validate
 
-// ErrorResponse is the form used for API responses from failures in the API.
-type ErrorResponse struct {
-	Error  string `json:"error"`
-	Fields string `json:"fields,omitempty"`
-}
+// translator is a cache of locale and translation information.
+var translator ut.Translator
 
-// RequestError is used to pass an error during the request through the
-// application with web specific context.
-type RequestError struct {
-	Err    error
-	Status int
-	Fields error
-}
+func init() {
 
-// NewRequestError warps a provided error with an HTTP status code. This
-// function should be used when handlers encounter expected errors.
-func NewRequestError(err error, status int) error {
-	return &RequestError{err, status, nil}
-}
+	// Instantiate a validator.
+	validate = validator.New()
 
-// Error implements the error interface. It uses the default message of the
-// wrapped error. This is what will be shown in the services' logs.
-func (err *RequestError) Error() string {
-	return err.Err.Error()
-}
+	// Create a translator for english so the error messages are
+	// more human-readable than techanical.
+	translator, _ := ut.New(en.New(), en.New()).GetTranslator("en")
 
-// FieldError is used to indicate an error with a specific request field.
-type FieldError struct {
-	Field string `json:"field"`
-	Error string `json:"error"`
-}
+	// Register the english error messages for use.
+	en_translations.RegisterDefaultTranslations(validate, translator)
 
-// FieldErrors represent a collection of field errors.
-type FieldErrors []FieldError
-
-// Error implements the error interface.
-func (fe FieldErrors) Error() string {
-	d, err := json.Marshal(fe)
-	if err != nil {
-		return err.Error()
-	}
-	return string(d)
-}
-
-// Cause iterates through all the wrapped errors until the root
-// error value is reached.
-func Cause(err error) error {
-	root := err
-	for {
-		if err = errors.Unwrap(root); err == nil {
-			return root
+	// Use JSON tag names for errors instead of Go struct names.
+	validate.RegisterTagNameFunc(func(fld reflect.StructField) string {
+		name := strings.SplitN(fld.Tag.Get("json"), ",", 2)[0]
+		if name == "-" {
+			return ""
 		}
-		err = root
+		return name
+	})
+}
+
+// Check validates the provided model against it's declared tags.
+func Check(val interface{}) error {
+	if err := validate.Struct(val); err != nil {
+
+		// Use a type assertion to get the real error value.
+		verrors, ok := err.(validator.ValidationErrors)
+		if !ok {
+			return err
+		}
+
+		var fields FieldErrors
+		for _, verror := range verrors {
+			field := FieldError{
+				Field: verror.Field(),
+				Error: verror.Translate(translator),
+			}
+			fields = append(fields, field)
+		}
+
+		return fields
 	}
+	return nil
+}
+
+// GenerateID generate a unique id for entities.
+func GenerateID() string {
+	return uuid.NewString()
+}
+
+// CheckID validates that the format of an id is valid.
+func CheckID(id string) error {
+	if _, err := uuid.Parse(id); err != nil {
+		return ErrInvalidID
+	}
+	return nil
 }

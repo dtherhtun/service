@@ -25,6 +25,7 @@ import (
 
 /*
 Need to figure out timeouts for http service.
+Add validate.Email function.
 */
 
 var build = "develop"

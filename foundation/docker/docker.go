@@ -50,7 +50,7 @@ func StartContainer(t *testing.T, image, port string, args ...string) *Container
 		Host: net.JoinHostPort(ip, randPort),
 	}
 
-	t.Logf("Image:		%s", image)
+	t.Logf("Image:	%s", image)
 	t.Logf("ContainerID:	%s", c.ID)
 	t.Logf("Host:		%s", c.Host)
 

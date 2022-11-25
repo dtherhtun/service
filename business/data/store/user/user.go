@@ -267,15 +267,15 @@ func (s Store) Authenticate(ctx context.Context, now time.Time, email, password 
 		*
 	FROM
 		users
-	WHERE 
-	    email = :email`
+	WHERE
+		email = :email`
 
 	var usr User
 	if err := database.NamedQueryStruct(ctx, s.log, s.db, q, data, &usr); err != nil {
 		if err == database.ErrNotFound {
 			return auth.Claims{}, database.ErrNotFound
 		}
-		return auth.Claims{}, fmt.Errorf("selecting email[%q]: %w", email, err)
+		return auth.Claims{}, fmt.Errorf("selecting user[%q]: %w", email, err)
 	}
 
 	// Compare the provided password with the saved hash. Use the bcrypt

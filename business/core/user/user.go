@@ -126,7 +126,7 @@ func (c Core) Authenticate(ctx context.Context, now time.Time, email, password s
 
 	claims, err := c.user.Authenticate(ctx, now, email, password)
 	if err != nil {
-		return auth.Claims{}, fmt.Errorf("query: %w", err)
+		return auth.Claims{}, err
 	}
 
 	// PERFORM POSt BUSINESS OPERATIONS

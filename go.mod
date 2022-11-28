@@ -3,10 +3,10 @@ module github.com/dtherhtun/service
 go 1.19
 
 require (
-	github.com/ardanlabs/conf/v3 v3.1.2
+	github.com/ardanlabs/conf/v3 v3.1.3
 	github.com/ardanlabs/darwin v1.4.0
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
-	github.com/dimfeld/httptreemux/v5 v5.4.0
+	github.com/dimfeld/httptreemux/v5 v5.5.0
 	github.com/go-playground/locales v0.14.0
 	github.com/go-playground/universal-translator v0.18.0
 	github.com/go-playground/validator/v10 v10.11.1
@@ -22,7 +22,7 @@ require (
 	go.opentelemetry.io/otel/trace v1.11.1
 	go.uber.org/automaxprocs v1.5.1
 	go.uber.org/zap v1.23.0
-	golang.org/x/crypto v0.0.0-20221010152910-d6f0a8c073c2
+	golang.org/x/crypto v0.3.0
 )
 
 require (
@@ -34,6 +34,6 @@ require (
 	go.opentelemetry.io/otel/metric v0.33.0 // indirect
 	go.uber.org/atomic v1.10.0 // indirect
 	go.uber.org/multierr v1.8.0 // indirect
-	golang.org/x/sys v0.0.0-20221010170243-090e33056c14 // indirect
-	golang.org/x/text v0.3.8 // indirect
+	golang.org/x/sys v0.2.0 // indirect
+	golang.org/x/text v0.4.0 // indirect
 )
